@@ -9,13 +9,15 @@ public class InputCtrl : MonoBehaviour {
 	Rigidbody2D rb2D ;
 	private RoleMovment m_RM;
 	private bool isRun = false;
-	Animator m_anima;
+	//Animator m_anima;
+    public RoleAnimation m_anima;
+
 
 	void Awake () {
 		m_RoleMovment = gameObject.GetComponent<RoleMovment>();
 		rb2D = gameObject.GetComponent<Rigidbody2D>();
 		m_RM = gameObject.GetComponent<RoleMovment>();
-		m_anima = GetComponent<Animator>();
+		//m_anima = GetComponent<Animator>();
 	}
 	void Start () {
 		
@@ -23,8 +25,9 @@ public class InputCtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-		m_RoleMovment.OnJump(Input.GetButtonDown("Jump"));
+
+        m_RoleMovment.OnJump(Input.GetButtonDown("Jump"));
+            
 		
 		// if (GlobalManager.instance.isG)
 		// {
@@ -43,19 +46,20 @@ public class InputCtrl : MonoBehaviour {
 			m_RM.runSpeed = 10;
 			
 			isRun = false;
-			m_anima.Play("Player_Idle");
+            m_anima.Idle();
+			//m_anima.Play("Player_Idle");
 		}
-	if (isRun) 
-	{
-m_RoleMovment.OnMove( Input.GetAxisRaw("Horizontal"),"IsAttack");
-m_RoleMovment.OnAttack(true);
-	}else
-	{
+	    if (isRun) 
+	    {
+            m_RoleMovment.OnMove( Input.GetAxisRaw("Horizontal"),"IsAttack");
+            m_RoleMovment.OnAttack(true);
+	    }else
+	    {
 			m_RoleMovment.OnMove( Input.GetAxisRaw("Horizontal"),"Speed");
-		m_RoleMovment.OnAttack(false);
+		    m_RoleMovment.OnAttack(false);
 	
-		// m_anima.Play("Player_Idle");
-	}
+		    // m_anima.Play("Player_Idle");
+	    }
 	
 	}
 }

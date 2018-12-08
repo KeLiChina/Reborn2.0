@@ -6,8 +6,9 @@ public class RoleMovment : MonoBehaviour {
 
 	public CharacterController2D controller;
 	public Animator animator;
+    public RoleAnimation m_anima;
 
-	public float runSpeed = 40f;
+    public float runSpeed = 40f;
 
 	public float horizontalMove = 0f;
 	public bool jump = false;
@@ -28,6 +29,7 @@ public class RoleMovment : MonoBehaviour {
 	public virtual void OnMove(float horizontal,string actionName)
 	{
 		horizontalMove = horizontal * runSpeed;
+        //m_anima.Move();
 		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 	}
 	public virtual void OnJump(bool Jump)
@@ -40,14 +42,14 @@ public class RoleMovment : MonoBehaviour {
 	}
 
 		public virtual void OnAttack(bool atk)
-	{
-		
-			
+	    {
+
+            //m_anima.Attack();
 			animator.SetBool("IsAttack", atk);
 			m_atk = true;
 		
 
-	}
+	    }
 
 
 	public virtual void OnCrouch(bool Crouch)
@@ -59,6 +61,7 @@ public class RoleMovment : MonoBehaviour {
 		{
 			crouch = false;
 		}
+        animator.SetBool("IsCrouch", Crouch);
 	}
 	public virtual void OnHurt(bool Hurt)
 	{
