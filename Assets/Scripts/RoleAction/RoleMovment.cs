@@ -14,47 +14,19 @@ public class RoleMovment : MonoBehaviour {
  	public bool crouch = false;
 	public bool hurt = false;
 
-	public float m_Horizontal = 0;
+	// public float m_Horizontal = 0;
 
-	public bool m_Jump = false;
+	// public bool m_Jump = false;
 
-	public bool m_Crouch = false;
+	// public bool m_Crouch = false;
 
-	public bool m_Hurt = false;
-
-	// Update is called once per frame
-	void Update () {
-
-		//horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
-		//animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-		//OnMove(m_Horizontal);
-		//OnJump(m_Jump);
-		//OnHurt(m_Hurt);
-		//OnCrouching(m_Crouch);
-/* 
-		if (Input.GetButtonDown("Jump"))
-		{
-			jump = true;
-			animator.SetBool("IsJumping", true);
-		}
-	
-
-		if (Input.GetButtonDown("Crouch"))
-		{
-			crouch = true;
-		} else if (Input.GetButtonUp("Crouch"))
-		{
-			crouch = false;
-		}
-*/
-	}
+	// public bool m_Hurt = false;
+	public bool m_IsPlayer = false;
+	public float m_HP = 100;
 
 	public virtual void OnMove(float horizontal)
 	{
-		 Debug.Log("horizontalMove..."+horizontal);
-		 horizontalMove = horizontal * runSpeed;
-		 Debug.Log("horizontalMove...."+horizontalMove);
+		horizontalMove = horizontal * runSpeed;
 		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 	}
 	public virtual void OnJump(bool Jump)
@@ -78,7 +50,7 @@ public class RoleMovment : MonoBehaviour {
 	}
 	public virtual void OnHurt(bool Hurt)
 	{
-		if (hurt)
+		if (Hurt)
 		{
 			hurt = true;
 			animator.SetBool("IsHurting", true);
@@ -100,4 +72,6 @@ public class RoleMovment : MonoBehaviour {
 		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
 		jump = false;
 	}
+
+	//
 }
