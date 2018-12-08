@@ -23,8 +23,9 @@ public class RoleMovment : MonoBehaviour {
 	// public bool m_Hurt = false;
 	public bool m_IsPlayer = false;
 	public float m_HP = 100;
+	public bool m_atk = false;
 
-	public virtual void OnMove(float horizontal)
+	public virtual void OnMove(float horizontal,string actionName)
 	{
 		horizontalMove = horizontal * runSpeed;
 		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
@@ -37,6 +38,17 @@ public class RoleMovment : MonoBehaviour {
 			animator.SetBool("IsJumping", true);
 		}
 	}
+
+		public virtual void OnAttack(bool atk)
+	{
+		
+			
+			animator.SetBool("IsAttack", atk);
+			m_atk = true;
+		
+
+	}
+
 
 	public virtual void OnCrouch(bool Crouch)
 	{
