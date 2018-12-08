@@ -11,11 +11,11 @@ public enum DAMAGER_TYPE
 }
 public class Damager : MonoBehaviour {
 	public DAMAGER_TYPE m_DamagerType = DAMAGER_TYPE.NULL;// 1 灵魂 2 普通攻击
-	private Role m_Role;
+	public Role m_Role;
 	private BoxCollider2D m_BoxCollider2D;
 	public GameObject soul;
 	void Start () {
-		m_Role = transform.GetComponentInParent<Role>();
+		// m_Role = transform.GetComponentInParent<Role>();
 		if (m_DamagerType == DAMAGER_TYPE.NORMAL)
 		{
 			StartCoroutine(IE_Destroy());
@@ -29,12 +29,13 @@ public class Damager : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D obj)
 	{
 		Role objRole = obj.transform.GetComponentInParent<Role>();
-		if (objRole == null)
+		if (objRole == null && obj.tag != "Eff")
 		{
-			if (obj.tag == "plane")
+			if (obj.tag == "Plane")
 			{
 				GameObject sou = Instantiate(soul,transform.position,transform.rotation);
 				soul.transform.parent = GlobalManager.instance.transform;
+				GlobalManager.instance.SetSoul(sou);
 			}
 			Destroy(gameObject);
 		}
@@ -56,6 +57,7 @@ public class Damager : MonoBehaviour {
 					objRole.Init();
 				}
 				Destroy(gameObject);
+				m_Role.LogicDie();
 			
 			}
 			else if (m_DamagerType == DAMAGER_TYPE.NORMAL)

@@ -57,7 +57,10 @@ public class GlobalManager : MonoBehaviour {
 	{
 		for (int i = 0; i < EnemyRoles.Count;i++)
 		{
-			Debug.Log("====Look At sou====");
+			if (Vector3.Distance(EnemyRoles[i].transform.position,soul.transform.position) < 20)
+			{
+				EnemyRoles[i].EnemyMove(soul.transform);
+			}
 		}
 	}
 

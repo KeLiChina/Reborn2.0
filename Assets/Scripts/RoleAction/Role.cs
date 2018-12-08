@@ -12,7 +12,7 @@ public enum ROLE_TYPE
 }
 public class Role : MonoBehaviour {
 
-	
+	public float bulletSpeed = 1000f;
 	public Damager norDamage;
 	public Damager souDamage;
 	private float m_HP = 100;
@@ -32,13 +32,20 @@ public class Role : MonoBehaviour {
 	public Transform m_AtkForward;
 	private float m_protateTime = 0.6f;
 
+	private RoleMovment m_RoleMovment;
+	private Transform TargetSoul;
+
+	public bool isPlayer = false;
+
 	public CharacterController2D m_characterController2d;
 	void Awake () {
 		m_characterController2d = GetComponentInChildren<CharacterController2D>();
+		m_RoleMovment = GetComponent<RoleMovment>();
 	}
 	
 	void Start () {
 		Init();
+	
 	}
 	
 	// Update is called once per frame
@@ -56,18 +63,20 @@ public class Role : MonoBehaviour {
 			m_protateTime = 0.6f;
 			moveSpeed = 20f;
 			crash = 70;
+			bulletSpeed= 1000;
 			
 
 		}
 		else if (m_RoleType ==ROLE_TYPE.THIEF)
 		{
 
-			m_HP = 100f;
+			m_HP = 40;
 			bulletCost = 40f;
 			m_AddForce = 700;
 			m_protateTime = 0.6f;
 			moveSpeed = 20f;
 			crash = 70;
+			bulletSpeed= 2000;
 		}
 		else if (m_RoleType ==ROLE_TYPE.ZHUJUE)
 		{
@@ -78,6 +87,7 @@ public class Role : MonoBehaviour {
 			m_protateTime = 0.6f;
 			moveSpeed = 20f;
 			crash = 70;
+			bulletSpeed= 1000;
 		}
 		// else if (m_RoleType == 4)
 		// {
@@ -90,7 +100,10 @@ public class Role : MonoBehaviour {
 		// 	crash = 70;
 		// }
 
-
+		if (GlobalManager.instance.m_Player == transform)
+		{
+			StartCoroutine(IE_LifeCountDown());
+		}
 
 	}
 
@@ -105,6 +118,7 @@ public class Role : MonoBehaviour {
 			LogicDie();
 			SetMove(false);
 		}
+
 	}
 	public void GetHurt(Transform ts)
 	{
@@ -133,6 +147,10 @@ public class Role : MonoBehaviour {
 		protect = true;
 		GlobalManager.instance.RemoveEnemy(this);
 		StartCoroutine(IE_Destroy());
+		if (GlobalManager.instance.m_Player == transform)
+		{
+			GlobalManager.instance.GameStart();
+		}
 		
 	}	
 
@@ -143,6 +161,28 @@ public class Role : MonoBehaviour {
 		noratk.transform.parent = m_AtkForward;
 		
 	}	
+	public void soulAtk()
+	{
+		// play atk()
+		var noratk = Instantiate(souDamage,m_AtkForward.position,m_AtkForward.rotation);
+		//noratk.transform.parent = m_AtkForward;
+		noratk.m_Role = this;
+		Rigidbody2D r2d = noratk.gameObject.GetComponent<Rigidbody2D>();
+		
+		float xforce = bulletSpeed + bulletSpeed * Mathf.Abs(Input.GetAxisRaw("Horizontal"));
+		float yforce = bulletSpeed+ bulletSpeed * Mathf.Abs(Input.GetAxisRaw("Horizontal")) * 0.3f;
+		if (!m_characterController2d.m_FacingRight)
+		{
+			xforce = -xforce;
+		}
+		if (!protect)
+		{
+			r2d.AddForce(new Vector2(xforce,yforce ));
+			
+		}
+		
+		
+	}
 
 	public void Reborn()
 	{
@@ -187,6 +227,27 @@ public class Role : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 		Destroy(gameObject);
     }
+
+	IEnumerator IE_LifeCountDown()
+    {
+  
+		while(false)
+		{
+  			yield return new WaitForSeconds(1f);
+			if ( m_HP > 0 )
+			{
+			m_HP -= 10;
+			}
+			else
+			{
+			LogicDie();
+			SetMove(false);	
+			}
+		}
+      
+	
+		
+    }
 	public bool GetIsForWardRight()
 	{
 		return (transform.position.x - m_AtkForward.position.x) > 0;
@@ -202,4 +263,44 @@ public class Role : MonoBehaviour {
 
 		}
 	}
+	public void EnemyMove(Transform tf)
+	{
+		TargetSoul = tf ;
+		if (GlobalManager.instance.m_Player != transform)
+		{
+			StartCoroutine(IE_EnemyMove());
+		}
+	}
+
+		IEnumerator IE_EnemyMove()
+    {
+		float moveTime = 4f;
+		bool signe = true;
+		while(signe)
+		{
+  			yield return new WaitForSeconds(0.2f);
+			
+			if ( moveTime > 0 && Vector3.Distance(TargetSoul.position,transform.position) > 0.5 )
+			{
+				moveTime =  moveTime - 0.2f;
+				float dis = TargetSoul.position.x -transform.position.x;
+				float enemyMoveSpeed = 0.2f;
+				if (dis<=0 )
+				{
+					m_RoleMovment.OnMove((float) -0.2,"IsAttack");
+				}
+				else{
+				m_RoleMovment.OnMove((float) 0.2,"IsAttack");
+				}
+			}
+			else
+			{
+			signe = false;	
+			StopCoroutine(IE_EnemyMove());
+			}
+		}
+      
+	
+		
+    }
 }
