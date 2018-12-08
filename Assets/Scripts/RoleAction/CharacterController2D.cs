@@ -30,10 +30,13 @@ public class CharacterController2D : MonoBehaviour
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
 
+	public RoleMovment m_RoleMovement;
+
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
-
+		m_RoleMovement = GetComponent<RoleMovment>();
+		// m_JumpForce = mr
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
 
@@ -128,7 +131,7 @@ public class CharacterController2D : MonoBehaviour
 		{
 			// Add a vertical force to the player.
 			m_Grounded = false;
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			m_Rigidbody2D.AddForce(new Vector2(0f, m_RoleMovement.JumpFroce));
 		}
 	}
 

@@ -47,11 +47,11 @@ public class InputCtrl : MonoBehaviour {
 		}
 	if (isRun) 
 	{
-m_RoleMovment.OnMove( Input.GetAxisRaw("Horizontal"),"IsAttack");
-m_RoleMovment.OnAttack(true);
+		m_RoleMovment.OnMove( Input.GetAxisRaw("Horizontal"),"IsAttack");
+		m_RoleMovment.OnAttack(true);
 	}else
 	{
-			m_RoleMovment.OnMove( Input.GetAxisRaw("Horizontal"),"Speed");
+		m_RoleMovment.OnMove( Input.GetAxisRaw("Horizontal"),"Speed");
 		m_RoleMovment.OnAttack(false);
 	
 		// m_anima.Play("Player_Idle");
