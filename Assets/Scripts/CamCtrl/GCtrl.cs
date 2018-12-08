@@ -11,11 +11,6 @@ public class GCtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (GlobalManager.instance.isG)
-		{
-			rb2D.gravityScale = -3;
-			
-		}else
-			rb2D.gravityScale = 3;
+	
 	}
 }

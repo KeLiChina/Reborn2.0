@@ -5,12 +5,11 @@ using UnityEngine;
 public class GlobalManager : MonoBehaviour {
 
    	public static GlobalManager instance { get; set; }
-	public bool isG = false;
-	public bool GetG ()
-	{
-		return isG;
-	}
-	   protected void Awake()
+	public Transform m_Player;
+
+		
+
+	protected void Awake()
     {
         if (GlobalManager.instance == null)
         {
@@ -24,15 +23,20 @@ public class GlobalManager : MonoBehaviour {
 	
 	void Update()
 	{
-		// if (Input.GetAxisRaw("Horizontal")!= 0)
-		// {
-		// 	SetG(true);
-		// } 
-		// else SetG(false);
+	
 	}
-	public void SetG (bool bl)
+	public void SetPlayer(Transform ts)
 	{
-		 isG = bl;
+		m_Player = ts;
 	}
+	public void GameOver ()
+	{
+
+	}
+	public void GameStart ()
+	{
+		
+	}
+	
 
 }
