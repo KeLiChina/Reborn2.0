@@ -69,7 +69,7 @@ public class InputCtrl : MonoBehaviour {
 	
 	if (Input.GetKeyDown(KeyCode.C))
 		{
-			Debug.Log("Enter F");
+			
 			m_Role.soulAtk();
 		}
 	}

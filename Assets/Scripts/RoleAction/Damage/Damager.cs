@@ -31,10 +31,11 @@ public class Damager : MonoBehaviour {
 		Role objRole = obj.transform.GetComponentInParent<Role>();
 		if (objRole == null && obj.tag != "Eff")
 		{
-			if (obj.tag == "plane")
+			if (obj.tag == "Plane")
 			{
 				GameObject sou = Instantiate(soul,transform.position,transform.rotation);
 				soul.transform.parent = GlobalManager.instance.transform;
+				GlobalManager.instance.SetSoul(sou);
 			}
 			Destroy(gameObject);
 		}

@@ -32,11 +32,15 @@ public class Role : MonoBehaviour {
 	public Transform m_AtkForward;
 	private float m_protateTime = 0.6f;
 
+	private RoleMovment m_RoleMovment;
+	private Transform TargetSoul;
+
 	public bool isPlayer = false;
 
 	public CharacterController2D m_characterController2d;
 	void Awake () {
 		m_characterController2d = GetComponentInChildren<CharacterController2D>();
+		m_RoleMovment = GetComponent<RoleMovment>();
 	}
 	
 	void Start () {
@@ -66,7 +70,7 @@ public class Role : MonoBehaviour {
 		else if (m_RoleType ==ROLE_TYPE.THIEF)
 		{
 
-			m_HP = 100f;
+			m_HP = 40;
 			bulletCost = 40f;
 			m_AddForce = 700;
 			m_protateTime = 0.6f;
@@ -96,7 +100,10 @@ public class Role : MonoBehaviour {
 		// 	crash = 70;
 		// }
 
-
+		if (GlobalManager.instance.m_Player == transform)
+		{
+			StartCoroutine(IE_LifeCountDown());
+		}
 
 	}
 
@@ -140,6 +147,10 @@ public class Role : MonoBehaviour {
 		protect = true;
 		GlobalManager.instance.RemoveEnemy(this);
 		StartCoroutine(IE_Destroy());
+		if (GlobalManager.instance.m_Player == transform)
+		{
+			GlobalManager.instance.GameStart();
+		}
 		
 	}	
 
@@ -216,6 +227,27 @@ public class Role : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 		Destroy(gameObject);
     }
+
+	IEnumerator IE_LifeCountDown()
+    {
+  
+		while(false)
+		{
+  			yield return new WaitForSeconds(1f);
+			if ( m_HP > 0 )
+			{
+			m_HP -= 10;
+			}
+			else
+			{
+			LogicDie();
+			SetMove(false);	
+			}
+		}
+      
+	
+		
+    }
 	public bool GetIsForWardRight()
 	{
 		return (transform.position.x - m_AtkForward.position.x) > 0;
@@ -231,4 +263,44 @@ public class Role : MonoBehaviour {
 
 		}
 	}
+	public void EnemyMove(Transform tf)
+	{
+		TargetSoul = tf ;
+		if (GlobalManager.instance.m_Player != transform)
+		{
+			StartCoroutine(IE_EnemyMove());
+		}
+	}
+
+		IEnumerator IE_EnemyMove()
+    {
+		float moveTime = 4f;
+		bool signe = true;
+		while(signe)
+		{
+  			yield return new WaitForSeconds(0.2f);
+			
+			if ( moveTime > 0 && Vector3.Distance(TargetSoul.position,transform.position) > 0.5 )
+			{
+				moveTime =  moveTime - 0.2f;
+				float dis = TargetSoul.position.x -transform.position.x;
+				float enemyMoveSpeed = 0.2f;
+				if (dis<=0 )
+				{
+					m_RoleMovment.OnMove((float) -0.2,"IsAttack");
+				}
+				else{
+				m_RoleMovment.OnMove((float) 0.2,"IsAttack");
+				}
+			}
+			else
+			{
+			signe = false;	
+			StopCoroutine(IE_EnemyMove());
+			}
+		}
+      
+	
+		
+    }
 }
