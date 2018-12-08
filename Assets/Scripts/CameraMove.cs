@@ -53,10 +53,12 @@ public class CameraMove : MonoBehaviour {
 
 
         //测试
+        /*
         if (Input.GetMouseButtonDown(0))
         {
             changeTarget(test);
         }
+        */
     }
 
     public void changeTarget(Transform trans)
