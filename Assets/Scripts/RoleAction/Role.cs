@@ -157,14 +157,16 @@ public class Role : MonoBehaviour {
 		//noratk.transform.parent = m_AtkForward;
 		noratk.m_Role = this;
 		Rigidbody2D r2d = noratk.gameObject.GetComponent<Rigidbody2D>();
-		float  addForce = bulletSpeed;
+		
+		float xforce = bulletSpeed + bulletSpeed * Mathf.Abs(Input.GetAxisRaw("Horizontal"));
+		float yforce = bulletSpeed+ bulletSpeed * Mathf.Abs(Input.GetAxisRaw("Horizontal")) * 0.3f;
 		if (!m_characterController2d.m_FacingRight)
 		{
-			addForce = -m_AddForce;
+			xforce = -xforce;
 		}
 		if (!protect)
 		{
-			r2d.AddForce(new Vector2(addForce,addForce ));
+			r2d.AddForce(new Vector2(xforce,yforce ));
 			
 		}
 		

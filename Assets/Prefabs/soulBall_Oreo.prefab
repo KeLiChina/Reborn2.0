@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114417171550719406}
   m_Layer: 0
   m_Name: soulBall_Oreo
-  m_TagString: Untagged
+  m_TagString: Eff
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DamagerType: 1
+  m_Role: {fileID: 0}
   soul: {fileID: 1321066255354320, guid: 9b6173645aa560f459962edc2f8f8a34, type: 2}
 --- !u!198 &198701818978624936
 ParticleSystem:

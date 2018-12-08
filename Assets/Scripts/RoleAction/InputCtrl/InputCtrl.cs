@@ -67,8 +67,9 @@ public class InputCtrl : MonoBehaviour {
 		// m_anima.Play("Player_Idle");
 	}
 	
-	if (Input.GetKeyDown(KeyCode.F))
+	if (Input.GetKeyDown(KeyCode.C))
 		{
+			Debug.Log("Enter F");
 			m_Role.soulAtk();
 		}
 	}

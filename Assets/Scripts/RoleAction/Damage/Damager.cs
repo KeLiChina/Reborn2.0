@@ -29,7 +29,7 @@ public class Damager : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D obj)
 	{
 		Role objRole = obj.transform.GetComponentInParent<Role>();
-		if (objRole == null)
+		if (objRole == null && obj.tag != "Eff")
 		{
 			if (obj.tag == "plane")
 			{
@@ -56,6 +56,7 @@ public class Damager : MonoBehaviour {
 					objRole.Init();
 				}
 				Destroy(gameObject);
+				m_Role.LogicDie();
 			
 			}
 			else if (m_DamagerType == DAMAGER_TYPE.NORMAL)
