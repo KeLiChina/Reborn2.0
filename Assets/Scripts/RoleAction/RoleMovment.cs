@@ -24,6 +24,7 @@ public class RoleMovment : MonoBehaviour {
 	public bool m_IsPlayer = false;
 	public float m_HP = 100;
 	public bool m_atk = false;
+	public float JumpFroce = 400;
 
 	public virtual void OnMove(float horizontal,string actionName)
 	{

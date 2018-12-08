@@ -5,6 +5,10 @@ using UnityEngine;
 public class PlayerMovement : RoleMovment {
 
 
+void Start()
+{
+ JumpFroce = 1000;
+}
 void FixedUpdate ()
 	{
 		// Move our character
