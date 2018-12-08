@@ -99,18 +99,6 @@ public class Role : MonoBehaviour {
         yield return new WaitForSeconds(m_protateTime);
 		protect = false;
     }
-	IEnumerator IE_Destroy()
-    {
-        // if (m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
-        // {
-        //     m_AnimatorState = AnimatorState.Idle;
-        //     m_Animator.Play(m_Idle);
-        // }
-        // yield return new WaitForEndOfFrame();
-
-        yield return new WaitForSeconds(1f);
-		Destroy(gameObject);
-    }
 	public bool GetIsForWardRight()
 	{
 		return (transform.position.x - m_AtkForward.position.x) > 0;
