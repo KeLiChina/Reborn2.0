@@ -10,6 +10,7 @@ public class Launcher2D : MonoBehaviour {
 	public bool launch;
 	public float force = 150f;
 	public float moveSpeed = 1f;
+    float count = 0f;
 
 	//create a trajectory predictor in code
 	public TrajectoryPredictor tp;
@@ -20,6 +21,7 @@ public class Launcher2D : MonoBehaviour {
 		tp.accuracy = 0.99f;
 		tp.lineWidth = 0.1f;
 		tp.iterationLimit = 100;
+        
 	}
 
 	// Update is called once per frame
