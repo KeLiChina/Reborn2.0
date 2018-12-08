@@ -5,6 +5,7 @@ using UnityEngine;
 public class Chase : MonoBehaviour {
 
     public Transform playerTrans;
+    public float offset = 5f;
 
 
     void Start()
@@ -16,7 +17,7 @@ public class Chase : MonoBehaviour {
     void FixedUpdate()
     {
              
-        this.transform.position = new Vector3(playerTrans.position.x, playerTrans.position.y, playerTrans.position.z);
+        this.transform.position = new Vector3(playerTrans.position.x, offset, playerTrans.position.z);
         
     }
 
