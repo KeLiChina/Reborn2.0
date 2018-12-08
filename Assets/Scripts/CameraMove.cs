@@ -7,7 +7,7 @@ public class CameraMove : MonoBehaviour {
 
     public GameObject camTargerPoint;
     public float chaseSpeed = 10f;
-    public Transform test;
+    //public Transform test;
 
 
     private static GameObject MonoSingletionRoot;
