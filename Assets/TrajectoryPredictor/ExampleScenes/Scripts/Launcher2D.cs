@@ -12,13 +12,13 @@ public class Launcher2D : MonoBehaviour {
 	public float moveSpeed = 1f;
 
 	//create a trajectory predictor in code
-	TrajectoryPredictor tp;
+	public TrajectoryPredictor tp;
 	void Start(){
 		tp = gameObject.GetComponent<TrajectoryPredictor>();
 		tp.predictionType = TrajectoryPredictor.predictionMode.Prediction2D;
 		tp.drawDebugOnPrediction = true;
 		tp.accuracy = 0.99f;
-		tp.lineWidth = 0.025f;
+		tp.lineWidth = 0.1f;
 		tp.iterationLimit = 100;
 	}
 
