@@ -11,11 +11,11 @@ public enum DAMAGER_TYPE
 }
 public class Damager : MonoBehaviour {
 	public DAMAGER_TYPE m_DamagerType = DAMAGER_TYPE.NULL;// 1 灵魂 2 普通攻击
-	private Role m_Role;
+	public Role m_Role;
 	private BoxCollider2D m_BoxCollider2D;
 	public GameObject soul;
 	void Start () {
-		m_Role = transform.GetComponentInParent<Role>();
+		// m_Role = transform.GetComponentInParent<Role>();
 		if (m_DamagerType == DAMAGER_TYPE.NORMAL)
 		{
 			StartCoroutine(IE_Destroy());

@@ -12,7 +12,7 @@ public enum ROLE_TYPE
 }
 public class Role : MonoBehaviour {
 
-	
+	public float bulletSpeed = 1000f;
 	public Damager norDamage;
 	public Damager souDamage;
 	private float m_HP = 100;
@@ -32,6 +32,8 @@ public class Role : MonoBehaviour {
 	public Transform m_AtkForward;
 	private float m_protateTime = 0.6f;
 
+	public bool isPlayer = false;
+
 	public CharacterController2D m_characterController2d;
 	void Awake () {
 		m_characterController2d = GetComponentInChildren<CharacterController2D>();
@@ -39,6 +41,7 @@ public class Role : MonoBehaviour {
 	
 	void Start () {
 		Init();
+	
 	}
 	
 	// Update is called once per frame
@@ -56,6 +59,7 @@ public class Role : MonoBehaviour {
 			m_protateTime = 0.6f;
 			moveSpeed = 20f;
 			crash = 70;
+			bulletSpeed= 1000;
 			
 
 		}
@@ -68,6 +72,7 @@ public class Role : MonoBehaviour {
 			m_protateTime = 0.6f;
 			moveSpeed = 20f;
 			crash = 70;
+			bulletSpeed= 2000;
 		}
 		else if (m_RoleType ==ROLE_TYPE.ZHUJUE)
 		{
@@ -78,6 +83,7 @@ public class Role : MonoBehaviour {
 			m_protateTime = 0.6f;
 			moveSpeed = 20f;
 			crash = 70;
+			bulletSpeed= 1000;
 		}
 		// else if (m_RoleType == 4)
 		// {
@@ -105,6 +111,7 @@ public class Role : MonoBehaviour {
 			LogicDie();
 			SetMove(false);
 		}
+
 	}
 	public void GetHurt(Transform ts)
 	{
@@ -143,6 +150,26 @@ public class Role : MonoBehaviour {
 		noratk.transform.parent = m_AtkForward;
 		
 	}	
+	public void soulAtk()
+	{
+		// play atk()
+		var noratk = Instantiate(souDamage,m_AtkForward.position,m_AtkForward.rotation);
+		//noratk.transform.parent = m_AtkForward;
+		noratk.m_Role = this;
+		Rigidbody2D r2d = noratk.gameObject.GetComponent<Rigidbody2D>();
+		float  addForce = bulletSpeed;
+		if (!m_characterController2d.m_FacingRight)
+		{
+			addForce = -m_AddForce;
+		}
+		if (!protect)
+		{
+			r2d.AddForce(new Vector2(addForce,addForce ));
+			
+		}
+		
+		
+	}
 
 	public void Reborn()
 	{
