@@ -772,6 +772,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114264147464298832, guid: 29f7a153c3619c6419a82f48d7abaa21,
+        type: 2}
+      propertyPath: OnCrouchEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4254337466771210, guid: 29f7a153c3619c6419a82f48d7abaa21, type: 2}
       propertyPath: m_LocalPosition.x
       value: -1.94
@@ -822,6 +827,50 @@ Prefab:
         type: 2}
       propertyPath: runSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840253613611580, guid: 29f7a153c3619c6419a82f48d7abaa21, type: 2}
+      propertyPath: m_Name
+      value: shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 95257056910387294, guid: 29f7a153c3619c6419a82f48d7abaa21,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 67a79a51651571f4bb8c842f1c62637b, type: 2}
+    - target: {fileID: 212736950537170018, guid: 29f7a153c3619c6419a82f48d7abaa21,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114264147464298832, guid: 29f7a153c3619c6419a82f48d7abaa21,
+        type: 2}
+      propertyPath: OnCrouchEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1410590262}
+    - target: {fileID: 114264147464298832, guid: 29f7a153c3619c6419a82f48d7abaa21,
+        type: 2}
+      propertyPath: OnCrouchEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnCrouching
+      objectReference: {fileID: 0}
+    - target: {fileID: 114264147464298832, guid: 29f7a153c3619c6419a82f48d7abaa21,
+        type: 2}
+      propertyPath: OnCrouchEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114264147464298832, guid: 29f7a153c3619c6419a82f48d7abaa21,
+        type: 2}
+      propertyPath: OnCrouchEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114264147464298832, guid: 29f7a153c3619c6419a82f48d7abaa21,
+        type: 2}
+      propertyPath: m_CrouchDisableCollider
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114264147464298832, guid: 29f7a153c3619c6419a82f48d7abaa21,
+        type: 2}
+      propertyPath: m_CrouchSpeed
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29f7a153c3619c6419a82f48d7abaa21, type: 2}
@@ -1469,6 +1518,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _g: 0
+--- !u!114 &1410590262 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114453110592116986, guid: 29f7a153c3619c6419a82f48d7abaa21,
+    type: 2}
+  m_PrefabInternal: {fileID: 998356159}
+  m_Script: {fileID: 11500000, guid: e5273cd41ac3c5246965ef9469d10dd7, type: 3}
 --- !u!1 &1530690151
 GameObject:
   m_ObjectHideFlags: 0
@@ -4314,7 +4369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269759892c7c2e042a7a87fcac2ca080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isG: 0
+  m_Player: {fileID: 0}
 --- !u!4 &2010624850
 Transform:
   m_ObjectHideFlags: 0
