@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Role : MonoBehaviour {
 
+	public Damager norDamage;
+	public Damager souDamage;
 	private float m_HP = 100;
 	public int  m_RoleType = 1; //1 shield 2, thief
 	
@@ -118,13 +120,16 @@ public class Role : MonoBehaviour {
 	{
 		// play Die()
 		protect = true;
+		GlobalManager.instance.RemoveEnemy(this);
+		StartCoroutine(IE_Destroy());
 		
 	}	
 
 	public void normalAtk()
 	{
 		// play atk()
-		protect = true;
+		var noratk = Instantiate(norDamage,m_AtkForward.position,m_AtkForward.rotation);
+
 		
 	}	
 
