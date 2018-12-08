@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GlobalManager : MonoBehaviour {
 
@@ -20,7 +21,11 @@ public class GlobalManager : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-	
+	 private IEnumerator IE_WaiteAndLoadScene(float t, int sceneID)
+    {
+        yield return new WaitForSeconds(t);
+        SceneManager.LoadScene(sceneID);
+    }
 	void Update()
 	{
 	
@@ -35,8 +40,9 @@ public class GlobalManager : MonoBehaviour {
 	}
 	public void GameStart ()
 	{
-		
+		 StartCoroutine(IE_WaiteAndLoadScene(2f, 0));
 	}
 	
 
 }
+ 	

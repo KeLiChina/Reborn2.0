@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class Role : MonoBehaviour {
 
-	public float m_HP = 100;
+	private float m_HP = 100;
+	public int  m_RoleType = 1; //1 shield 2, thief
+	
+	private float moveSpeed = 20f;
 
-	public float m_OneShotCast = 40;
+	private float crash = 70;
 
-	public float m_AddForce = 700;
+	private float m_AddForce = 700;
 
-	public float bulletCost = 40;
+	private float m_JumpForce = 700;
+
+	private float bulletCost = 40;
 	private bool protect = false;
 	private Rigidbody2D m_Rigidbody2D;
 	public Transform m_AtkForward;
 	private float m_protateTime = 0.6f;
-	void Start () {
+	void Awake () {
 		
+	}
+	
+	void Start () {
+		Init();
 	}
 	
 	// Update is called once per frame
@@ -26,6 +35,49 @@ public class Role : MonoBehaviour {
 
 	public void Init()
 	{
+		if (m_RoleType == 1)
+		{
+			m_HP = 100f;
+			bulletCost = 40f;
+			m_AddForce = 700;
+			m_protateTime = 0.6f;
+			moveSpeed = 20f;
+			crash = 70;
+			
+
+		}
+		else if (m_RoleType ==2)
+		{
+
+			m_HP = 100f;
+			bulletCost = 40f;
+			m_AddForce = 700;
+			m_protateTime = 0.6f;
+			moveSpeed = 20f;
+			crash = 70;
+		}
+		else if (m_RoleType ==3)
+		{
+
+			m_HP = 100f;
+			bulletCost = 40f;
+			m_AddForce = 700;
+			m_protateTime = 0.6f;
+			moveSpeed = 20f;
+			crash = 70;
+		}
+		else if (m_RoleType == 4)
+		{
+
+			m_HP = 100f;
+			bulletCost = 40f;
+			m_AddForce = 700;
+			m_protateTime = 0.6f;
+			moveSpeed = 20f;
+			crash = 70;
+		}
+
+
 
 	}
 
@@ -41,7 +93,7 @@ public class Role : MonoBehaviour {
 			SetMove(false);
 		}
 	}
-	public void GetHurt()
+	public void GetHurt(Transform ts)
 	{
 		// play hurt()
 		// add force;
@@ -51,10 +103,11 @@ public class Role : MonoBehaviour {
 			return;
 		}
 		float  addForce = m_AddForce;
-		if (!GetIsForWardRight())
+		if ((ts.position.x - transform.position.x) > 0)
 		{
 			addForce = -m_AddForce;
 		}
+	
 		m_Rigidbody2D.AddForce(new Vector2(addForce,0f ));
 		protect = true;
 		 StartCoroutine(IE_PortectTime());
@@ -64,6 +117,13 @@ public class Role : MonoBehaviour {
 	public void LogicDie()
 	{
 		// play Die()
+		protect = true;
+		
+	}	
+
+	public void normalAtk()
+	{
+		// play atk()
 		protect = true;
 		
 	}	
@@ -83,7 +143,7 @@ public class Role : MonoBehaviour {
 		{
 			m_Rigidbody2D.AddForce(new Vector2(addForce,0f ));
 			protect = true;
-			 StartCoroutine(IE_PortectTime());
+			StartCoroutine(IE_PortectTime());
 		}
 	}
 
