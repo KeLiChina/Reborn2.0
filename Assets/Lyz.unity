@@ -4180,7 +4180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accuracy: 0.98
   iterationLimit: 100
-  predictionType: 3
+  predictionType: 2
   raycastMask:
     serializedVersion: 2
     m_Bits: 0
