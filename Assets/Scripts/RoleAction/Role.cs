@@ -9,6 +9,8 @@ public class Role : MonoBehaviour {
 	public float m_OneShotCast = 40;
 
 	public float m_AddForce = 700;
+
+	public float bulletCost = 40;
 	private bool protect = false;
 	private Rigidbody2D m_Rigidbody2D;
 	public Transform m_AtkForward;
@@ -22,6 +24,23 @@ public class Role : MonoBehaviour {
 		
 	}
 
+	public void Init()
+	{
+
+	}
+
+	public void ShotBullet()
+	{
+		if ( m_HP > 0 )
+		{
+			m_HP -= bulletCost;
+		}
+		if (m_HP<= 0)
+		{
+			LogicDie();
+			SetMove(false);
+		}
+	}
 	public void GetHurt()
 	{
 		// play hurt()

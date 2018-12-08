@@ -40,14 +40,13 @@ public class RoleMovment : MonoBehaviour {
 		}
 	}
 
-		public virtual void OnAttack(bool atk)
+	public virtual void OnAttack(bool atk)
 	{
 		
 			
 			animator.SetBool("IsAttack", atk);
 			m_atk = true;
 		
-
 	}
 
 
