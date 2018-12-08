@@ -44,8 +44,8 @@ public class RoleMovment : MonoBehaviour {
 	{
 		
 			
-			animator.SetBool("IsAttack", atk);
-			m_atk = true;
+		animator.SetBool("IsAttack", atk);
+		m_atk = true;
 		
 	}
 

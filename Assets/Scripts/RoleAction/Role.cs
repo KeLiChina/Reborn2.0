@@ -2,12 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ROLE_TYPE
+{
+	NULL = -1,
+	SHIELD = 0,
+	THIEF = 1,
+	ZHUJUE = 2,
+	SIZE
+}
 public class Role : MonoBehaviour {
 
+	
 	public Damager norDamage;
 	public Damager souDamage;
 	private float m_HP = 100;
-	public int  m_RoleType = 1; //1 shield 2, thief
+	public ROLE_TYPE  m_RoleType = ROLE_TYPE.NULL; //1 shield 2, thief
 	
 	private float moveSpeed = 20f;
 
@@ -22,8 +31,10 @@ public class Role : MonoBehaviour {
 	private Rigidbody2D m_Rigidbody2D;
 	public Transform m_AtkForward;
 	private float m_protateTime = 0.6f;
+
+	public CharacterController2D m_characterController2d;
 	void Awake () {
-		
+		m_characterController2d = GetComponentInChildren<CharacterController2D>();
 	}
 	
 	void Start () {
@@ -37,7 +48,7 @@ public class Role : MonoBehaviour {
 
 	public void Init()
 	{
-		if (m_RoleType == 1)
+		if (m_RoleType == ROLE_TYPE.SHIELD)
 		{
 			m_HP = 100f;
 			bulletCost = 40f;
@@ -48,7 +59,7 @@ public class Role : MonoBehaviour {
 			
 
 		}
-		else if (m_RoleType ==2)
+		else if (m_RoleType ==ROLE_TYPE.THIEF)
 		{
 
 			m_HP = 100f;
@@ -58,7 +69,7 @@ public class Role : MonoBehaviour {
 			moveSpeed = 20f;
 			crash = 70;
 		}
-		else if (m_RoleType ==3)
+		else if (m_RoleType ==ROLE_TYPE.ZHUJUE)
 		{
 
 			m_HP = 100f;
@@ -68,16 +79,16 @@ public class Role : MonoBehaviour {
 			moveSpeed = 20f;
 			crash = 70;
 		}
-		else if (m_RoleType == 4)
-		{
+		// else if (m_RoleType == 4)
+		// {
 
-			m_HP = 100f;
-			bulletCost = 40f;
-			m_AddForce = 700;
-			m_protateTime = 0.6f;
-			moveSpeed = 20f;
-			crash = 70;
-		}
+		// 	m_HP = 100f;
+		// 	bulletCost = 40f;
+		// 	m_AddForce = 700;
+		// 	m_protateTime = 0.6f;
+		// 	moveSpeed = 20f;
+		// 	crash = 70;
+		// }
 
 
 
@@ -105,7 +116,7 @@ public class Role : MonoBehaviour {
 			return;
 		}
 		float  addForce = m_AddForce;
-		if ((ts.position.x - transform.position.x) > 0)
+		if (!m_characterController2d.m_FacingRight)
 		{
 			addForce = -m_AddForce;
 		}
@@ -129,7 +140,7 @@ public class Role : MonoBehaviour {
 	{
 		// play atk()
 		var noratk = Instantiate(norDamage,m_AtkForward.position,m_AtkForward.rotation);
-
+		noratk.transform.parent = m_AtkForward;
 		
 	}	
 

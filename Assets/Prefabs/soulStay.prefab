@@ -9,98 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1611084271969444}
+  m_RootGameObject: {fileID: 1321066255354320}
   m_IsPrefabAsset: 1
---- !u!1 &1611084271969444
+--- !u!1 &1321066255354320
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4820357732551648}
-  - component: {fileID: 198813160620203030}
-  - component: {fileID: 199962056161902446}
-  - component: {fileID: 50694278935253732}
-  - component: {fileID: 58826185213469266}
-  - component: {fileID: 114827530462306738}
+  - component: {fileID: 4402835323823854}
+  - component: {fileID: 198440203607087176}
+  - component: {fileID: 199095034740998658}
   m_Layer: 0
-  m_Name: soulBall
+  m_Name: soulStay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4820357732551648
+--- !u!4 &4402835323823854
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1611084271969444}
+  m_GameObject: {fileID: 1321066255354320}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.12, y: 1.41, z: 0}
+  m_LocalPosition: {x: 0.03, y: 0.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50694278935253732
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1611084271969444}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 5
-  m_LinearDrag: 0
-  m_AngularDrag: 100
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
---- !u!58 &58826185213469266
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1611084271969444}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.03}
-  serializedVersion: 2
-  m_Radius: 0.15
---- !u!114 &114827530462306738
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1611084271969444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73176d1f1063f0d48a1b7334a5a84f3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DamagerType: 1
-  soul: {fileID: 1321066255354320, guid: 9b6173645aa560f459962edc2f8f8a34, type: 2}
---- !u!198 &198813160620203030
+--- !u!198 &198440203607087176
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1611084271969444}
+  m_GameObject: {fileID: 1321066255354320}
   serializedVersion: 5
   lengthInSec: 10
-  simulationSpeed: 1
+  simulationSpeed: 0.3
   stopAction: 0
   looping: 1
   prewarm: 0
@@ -171,7 +120,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -322,7 +271,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
+      scalar: 1
       minScalar: 0.5
       maxCurve:
         serializedVersion: 2
@@ -602,13 +551,13 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 1000
     size3D: 0
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: -3
       minScalar: -0.1
       maxCurve:
         serializedVersion: 2
@@ -1985,7 +1934,7 @@ ParticleSystem:
         m_RotationOrder: 4
     inWorldSpace: 1
   InheritVelocityModule:
-    enabled: 0
+    enabled: 1
     m_Mode: 1
     m_Curve:
       serializedVersion: 2
@@ -4544,13 +4493,13 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &199962056161902446
+--- !u!199 &199095034740998658
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1611084271969444}
+  m_GameObject: {fileID: 1321066255354320}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
