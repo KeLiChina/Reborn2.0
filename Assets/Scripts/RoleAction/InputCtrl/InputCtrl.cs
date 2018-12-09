@@ -72,5 +72,11 @@ public class InputCtrl : MonoBehaviour {
 			
 			m_Role.soulAtk();
 		}
+	
+	if (Input.GetKeyDown(KeyCode.Space))
+		{
+			
+		GlobalManager.instance.GameStart();
+		}
 	}
 }

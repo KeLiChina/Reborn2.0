@@ -57,7 +57,7 @@ public class GlobalManager : MonoBehaviour {
 	{
 		for (int i = 0; i < EnemyRoles.Count;i++)
 		{
-			if (Vector3.Distance(EnemyRoles[i].transform.position,soul.transform.position) < 5)
+			if (Vector3.Distance(EnemyRoles[i].transform.position,soul.transform.position) < 7)
 			{
 				EnemyRoles[i].EnemyMove(soul.transform);
 			}

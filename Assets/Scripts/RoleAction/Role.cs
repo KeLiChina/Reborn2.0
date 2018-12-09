@@ -17,6 +17,7 @@ public class Role : MonoBehaviour {
 	public Damager norDamage;
 	public Damager souDamage;
 	private float m_HP = 100;
+	public float m_PSValue = 5000;
 	public ROLE_TYPE  m_RoleType = ROLE_TYPE.NULL; //1 shield 2, thief
 	
 	private float moveSpeed = 20f;
@@ -25,7 +26,7 @@ public class Role : MonoBehaviour {
 
 	private float m_AddForce = 700;
 
-	private float m_JumpForce = 700;
+	public float m_JumpForce = 700;
 
 	private float bulletCost = 40;
 	private bool protect = false;
@@ -40,6 +41,7 @@ public class Role : MonoBehaviour {
 
 	public CharacterController2D m_characterController2d;
 	private Light m_light ;
+	 private ParticleSystem ps;
 	private float m_Max_Light = 100;
 	private float m_Cur_Light =  100;
 	private float m_MIN_Light = 100;
@@ -48,6 +50,7 @@ public class Role : MonoBehaviour {
 		m_characterController2d = GetComponentInChildren<CharacterController2D>();
 		m_RoleMovment = GetComponent<RoleMovment>();
 		m_light = GetComponentInChildren<Light>();
+		ps = fire.GetComponent<ParticleSystem>();
 	}
 	
 	void Start () {
@@ -62,45 +65,33 @@ public class Role : MonoBehaviour {
 
 	public void SetLightPower(float value)
 	{
-		m_light.intensity = (value/m_Max_HP	)*m_Max_Light;
+		
+		var emission = ps.emission;
+        emission.rateOverTime = (value/m_Max_HP	) * m_PSValue;
 	}
 	public void Init()
 	{
 		if (m_RoleType == ROLE_TYPE.SHIELD)
 		{
-			m_HP = 100f;
+			m_HP = 140;
 			bulletCost = 40f;
 			m_AddForce = 700;
 			m_protateTime = 0.6f;
 			moveSpeed = 20f;
-			crash = 70;
-			bulletSpeed= 1000;
+			crash = 80;
+			bulletSpeed= 1100;
 			m_Max_Light = 6;
 			 m_Cur_Light =  100;
 			 m_MIN_Light = 100;
 			 m_Max_HP = m_HP;
+			 m_JumpForce = 600;
 			
 
 		}
 		else if (m_RoleType ==ROLE_TYPE.THIEF)
 		{
 
-			m_HP = 40;
-			bulletCost = 40f;
-			m_AddForce = 700;
-			m_protateTime = 0.6f;
-			moveSpeed = 20f;
-			crash = 70;
-			bulletSpeed= 2000;
-			 m_Cur_Light =  100;
-			 m_MIN_Light = 100;
-			 m_Max_Light = 6;
-			  m_Max_HP = m_HP;
-		}
-		else if (m_RoleType ==ROLE_TYPE.ZHUJUE)
-		{
-
-			m_HP = 100f;
+			m_HP = 100;
 			bulletCost = 40f;
 			m_AddForce = 700;
 			m_protateTime = 0.6f;
@@ -108,8 +99,25 @@ public class Role : MonoBehaviour {
 			crash = 70;
 			bulletSpeed= 1000;
 			 m_Cur_Light =  100;
+			 m_MIN_Light = 100;
 			 m_Max_Light = 6;
 			  m_Max_HP = m_HP;
+			  m_JumpForce = 600;
+		}
+		else if (m_RoleType ==ROLE_TYPE.ZHUJUE)
+		{
+
+			m_HP = 120;
+			bulletCost = 40f;
+			m_AddForce = 700;
+			m_protateTime = 0.6f;
+			moveSpeed = 20f;
+			crash = 70;
+			bulletSpeed= 1300;
+			 m_Cur_Light =  100;
+			 m_Max_Light = 6;
+			  m_Max_HP = m_HP;
+			   m_JumpForce = 600;
 		}
 		// else if (m_RoleType == 4)
 		// {
@@ -202,7 +210,7 @@ public class Role : MonoBehaviour {
 		Rigidbody2D r2d = noratk.gameObject.GetComponent<Rigidbody2D>();
 		
 		float xforce = bulletSpeed + bulletSpeed * Mathf.Abs(Input.GetAxisRaw("Horizontal"));
-		float yforce = bulletSpeed+ bulletSpeed * Mathf.Abs(Input.GetAxisRaw("Horizontal")) * 0.3f;
+		float yforce = bulletSpeed+ bulletSpeed * Mathf.Abs(Input.GetAxisRaw("Vertical")*2) ;
 		if (!m_characterController2d.m_FacingRight)
 		{
 			xforce = -xforce;
@@ -326,20 +334,20 @@ public class Role : MonoBehaviour {
 				float enemyMoveSpeed = 0.2f;
 				if (dis<=0 )
 				{
-					m_RoleMovment.OnMove((float) -0.2,"IsAttack");
+					m_RoleMovment.OnMove((float) -0.3,"IsAttack");
 					// m_RoleMovment.controller.Move((float) -0.2 * m_RoleMovment.runSpeed * Time.fixedDeltaTime, m_RoleMovment.crouch, m_RoleMovment.jump);
 					// m_RoleMovment.jump = false;
 					// transform.Translate((TargetSoul.position-transform.position).normalized*Time.deltaTime*400f);
-					 Vector3 v3 = new Vector3(transform.position.x - 0.1f,transform.position.y,transform.position.z);
+					 Vector3 v3 = new Vector3(transform.position.x - 0.3f,transform.position.y,transform.position.z);
 				
 	 				transform.position = v3;
 				}
 				else{
-				m_RoleMovment.OnMove((float) 0.2,"IsAttack");
+				m_RoleMovment.OnMove((float) 0.3,"IsAttack");
 				// m_RoleMovment.controller.Move((float) 0.2 * m_RoleMovment.runSpeed * Time.fixedDeltaTime, m_RoleMovment.crouch, m_RoleMovment.jump);
 				// 	m_RoleMovment.jump = false;
 				// transform.Translate((TargetSoul.position-transform.position).normalized*Time.deltaTime*400f);
-				 Vector3 v3 = new Vector3(transform.position.x + 0.1f,transform.position.y,transform.position.z);
+				 Vector3 v3 = new Vector3(transform.position.x + 0.3f,transform.position.y,transform.position.z);
 				 	 transform.position = v3;
 				}
 			}
