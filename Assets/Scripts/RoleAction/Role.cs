@@ -38,9 +38,15 @@ public class Role : MonoBehaviour {
 	public bool isPlayer = false;
 
 	public CharacterController2D m_characterController2d;
+	private Light m_light ;
+	private float m_Max_Light = 100;
+	private float m_Cur_Light =  100;
+	private float m_MIN_Light = 100;
+	private float m_Max_HP;
 	void Awake () {
 		m_characterController2d = GetComponentInChildren<CharacterController2D>();
 		m_RoleMovment = GetComponent<RoleMovment>();
+		m_light = GetComponent<Light>();
 	}
 	
 	void Start () {
@@ -53,6 +59,10 @@ public class Role : MonoBehaviour {
 		
 	}
 
+	public void SetLightPower(float value)
+	{
+		m_light.intensity = (value/m_Max_HP	)*m_Max_Light;
+	}
 	public void Init()
 	{
 		if (m_RoleType == ROLE_TYPE.SHIELD)
@@ -64,6 +74,10 @@ public class Role : MonoBehaviour {
 			moveSpeed = 20f;
 			crash = 70;
 			bulletSpeed= 1000;
+			m_Max_Light = 6;
+			 m_Cur_Light =  100;
+			 m_MIN_Light = 100;
+			 m_Max_HP = m_HP;
 			
 
 		}
@@ -77,6 +91,10 @@ public class Role : MonoBehaviour {
 			moveSpeed = 20f;
 			crash = 70;
 			bulletSpeed= 2000;
+			 m_Cur_Light =  100;
+			 m_MIN_Light = 100;
+			 m_Max_Light = 6;
+			  m_Max_HP = m_HP;
 		}
 		else if (m_RoleType ==ROLE_TYPE.ZHUJUE)
 		{
@@ -88,6 +106,9 @@ public class Role : MonoBehaviour {
 			moveSpeed = 20f;
 			crash = 70;
 			bulletSpeed= 1000;
+			 m_Cur_Light =  100;
+			 m_Max_Light = 6;
+			  m_Max_HP = m_HP;
 		}
 		// else if (m_RoleType == 4)
 		// {
@@ -103,19 +124,22 @@ public class Role : MonoBehaviour {
 		if (GlobalManager.instance.m_Player == transform)
 		{
 			StartCoroutine(IE_LifeCountDown());
+			SetLightPower(m_Max_HP);
 		
 		}
 		else
 			{
 				GlobalManager.instance.AddEnemy(this);
+				SetLightPower(0);
 			}
 	}
 
-	public void ShotBullet()
+	public void ShootBullet()
 	{
 		if ( m_HP > 0 )
 		{
 			m_HP -= bulletCost;
+			HP_Changer(m_HP);
 		}
 		if (m_HP<= 0)
 		{
@@ -148,6 +172,7 @@ public class Role : MonoBehaviour {
 	public void LogicDie()
 	{
 		// play Die()
+		SetLightPower(0);
 		protect = true;
 		GlobalManager.instance.RemoveEnemy(this);
 		StartCoroutine(IE_Destroy());
@@ -235,23 +260,30 @@ public class Role : MonoBehaviour {
 	IEnumerator IE_LifeCountDown()
     {
   
-		while(false)
+		while(true)
 		{
   			yield return new WaitForSeconds(1f);
 			if ( m_HP > 0 )
 			{
-			m_HP -= 10;
+				HP_Changer(-5);
 			}
 			else
 			{
 			LogicDie();
 			SetMove(false);	
 			}
+			
 		}
-      
-	
 		
     }
+
+	public void HP_Changer(float value)
+	{
+		m_HP-=value;
+		SetLightPower(m_HP);
+	}	
+
+
 	public bool GetIsForWardRight()
 	{
 		return (transform.position.x - m_AtkForward.position.x) > 0;
