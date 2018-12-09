@@ -103,8 +103,12 @@ public class Role : MonoBehaviour {
 		if (GlobalManager.instance.m_Player == transform)
 		{
 			StartCoroutine(IE_LifeCountDown());
+		
 		}
-
+		else
+			{
+				GlobalManager.instance.AddEnemy(this);
+			}
 	}
 
 	public void ShotBullet()
@@ -280,7 +284,7 @@ public class Role : MonoBehaviour {
 		{
   			yield return new WaitForSeconds(0.2f);
 			
-			if ( moveTime > 0 && Vector3.Distance(TargetSoul.position,transform.position) > 0.5 )
+			if ( moveTime > 0 && Vector3.Distance(TargetSoul.position,transform.position) > 0.2 )
 			{
 				moveTime =  moveTime - 0.2f;
 				float dis = TargetSoul.position.x -transform.position.x;
@@ -288,9 +292,20 @@ public class Role : MonoBehaviour {
 				if (dis<=0 )
 				{
 					m_RoleMovment.OnMove((float) -0.2,"IsAttack");
+					// m_RoleMovment.controller.Move((float) -0.2 * m_RoleMovment.runSpeed * Time.fixedDeltaTime, m_RoleMovment.crouch, m_RoleMovment.jump);
+					// m_RoleMovment.jump = false;
+					// transform.Translate((TargetSoul.position-transform.position).normalized*Time.deltaTime*400f);
+					 Vector3 v3 = new Vector3(transform.position.x - 0.1f,transform.position.y,transform.position.z);
+				
+	 				transform.position = v3;
 				}
 				else{
 				m_RoleMovment.OnMove((float) 0.2,"IsAttack");
+				// m_RoleMovment.controller.Move((float) 0.2 * m_RoleMovment.runSpeed * Time.fixedDeltaTime, m_RoleMovment.crouch, m_RoleMovment.jump);
+				// 	m_RoleMovment.jump = false;
+				// transform.Translate((TargetSoul.position-transform.position).normalized*Time.deltaTime*400f);
+				 Vector3 v3 = new Vector3(transform.position.x + 0.1f,transform.position.y,transform.position.z);
+				 	 transform.position = v3;
 				}
 			}
 			else
