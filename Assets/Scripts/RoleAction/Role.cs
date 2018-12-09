@@ -8,6 +8,8 @@ public enum ROLE_TYPE
 	SHIELD = 0,
 	THIEF = 1,
 	ZHUJUE = 2,
+	Clone = 3,
+	THIEF2 = 4,
 	SIZE
 }
 public class Role : MonoBehaviour {
@@ -73,13 +75,13 @@ public class Role : MonoBehaviour {
 	{
 		if (m_RoleType == ROLE_TYPE.SHIELD)
 		{
-			m_HP = 140;
-			bulletCost = 40f;
+			m_HP = 1000;
+			bulletCost = 500;
 			m_AddForce = 700;
 			m_protateTime = 0.6f;
 			moveSpeed = 20f;
 			crash = 80;
-			bulletSpeed= 1100;
+			bulletSpeed= 900;
 			m_Max_Light = 6;
 			 m_Cur_Light =  100;
 			 m_MIN_Light = 100;
@@ -91,12 +93,12 @@ public class Role : MonoBehaviour {
 		else if (m_RoleType ==ROLE_TYPE.THIEF)
 		{
 
-			m_HP = 100;
-			bulletCost = 40f;
+			m_HP = 1000;
+			bulletCost = 200;
 			m_AddForce = 700;
 			m_protateTime = 0.6f;
 			moveSpeed = 20f;
-			crash = 70;
+			crash = 80;
 			bulletSpeed= 1000;
 			 m_Cur_Light =  100;
 			 m_MIN_Light = 100;
@@ -107,8 +109,23 @@ public class Role : MonoBehaviour {
 		else if (m_RoleType ==ROLE_TYPE.ZHUJUE)
 		{
 
-			m_HP = 120;
-			bulletCost = 40f;
+			m_HP = 1000;
+			bulletCost = 50f;
+			m_AddForce = 700;
+			m_protateTime = 0.6f;
+			moveSpeed = 20f;
+			crash = 70;
+			bulletSpeed= 1300;
+			 m_Cur_Light =  100;
+			 m_Max_Light = 6;
+			  m_Max_HP = m_HP;
+			   m_JumpForce = 10;
+		}
+		else if (m_RoleType ==ROLE_TYPE.Clone)
+		{
+
+			m_HP = 1000;
+			bulletCost = 500;
 			m_AddForce = 700;
 			m_protateTime = 0.6f;
 			moveSpeed = 20f;
@@ -118,6 +135,22 @@ public class Role : MonoBehaviour {
 			 m_Max_Light = 6;
 			  m_Max_HP = m_HP;
 			   m_JumpForce = 600;
+		}
+		else if (m_RoleType ==ROLE_TYPE.THIEF2)
+		{
+
+			m_HP = 1000;
+			bulletCost = 200;
+			m_AddForce = 700;
+			m_protateTime = 0.6f;
+			moveSpeed = 20f;
+			crash = 80;
+			bulletSpeed= 1000;
+			 m_Cur_Light =  100;
+			 m_MIN_Light = 100;
+			 m_Max_Light = 6;
+			  m_Max_HP = m_HP;
+			  m_JumpForce = 1200;
 		}
 		// else if (m_RoleType == 4)
 		// {
@@ -149,14 +182,14 @@ public class Role : MonoBehaviour {
 	{
 		if ( m_HP > 0 )
 		{
-			m_HP -= bulletCost;
-			HP_Changer(m_HP);
+			
+			HP_Changer(-bulletCost);
 		}
-		if (m_HP<= 0)
-		{
-			LogicDie();
-			SetMove(false);
-		}
+		// if (m_HP<= 0)
+		// {
+		// 	LogicDie();
+		// 	SetMove(false);
+		// }
 
 	}
 	public void GetHurt(Transform ts)
@@ -203,6 +236,7 @@ public class Role : MonoBehaviour {
 	}	
 	public void soulAtk()
 	{
+		
 		// play atk()
 		var noratk = Instantiate(souDamage,m_AtkForward.position,m_AtkForward.rotation);
 		//noratk.transform.parent = m_AtkForward;
@@ -220,7 +254,7 @@ public class Role : MonoBehaviour {
 			r2d.AddForce(new Vector2(xforce,yforce ));
 			
 		}
-		
+		ShootBullet();
 		
 	}
 
@@ -292,6 +326,7 @@ public class Role : MonoBehaviour {
 	{
 		m_HP = m_HP + value;
 		SetLightPower(m_HP);
+		
 	}	
 
 

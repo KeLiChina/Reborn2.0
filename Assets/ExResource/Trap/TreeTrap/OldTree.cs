@@ -22,7 +22,7 @@ public class OldTree : MonoBehaviour {
 		canShoot = false;
 		var bull = Instantiate(Bullrt,shootPos.position,shootPos.rotation);
 		var r2d = bull.GetComponent<Rigidbody2D>();
-		r2d.AddForce(new Vector2(-1800f,1200f ));
+		r2d.AddForce(new Vector2(-1800f,200f ));
 		m_Animator.Play("TarpTrees");
 	}
 }

@@ -57,7 +57,12 @@ public class Damager : MonoBehaviour {
 					objRole.Init();
 				}
 				Destroy(gameObject);
-				m_Role.LogicDie();
+				if (GlobalManager.instance.m_Player != m_Role.transform)
+				{
+					m_Role.LogicDie();
+					m_Role.fire.SetActive(false);
+				}
+					
 			
 			}
 			else if (m_DamagerType == DAMAGER_TYPE.NORMAL)
