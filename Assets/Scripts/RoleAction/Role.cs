@@ -12,6 +12,7 @@ public enum ROLE_TYPE
 }
 public class Role : MonoBehaviour {
 
+	public GameObject fire;
 	public float bulletSpeed = 1000f;
 	public Damager norDamage;
 	public Damager souDamage;
@@ -125,12 +126,14 @@ public class Role : MonoBehaviour {
 		{
 			StartCoroutine(IE_LifeCountDown());
 			SetLightPower(m_Max_HP);
+			fire.SetActive(true);
 		
 		}
 		else
 			{
 				GlobalManager.instance.AddEnemy(this);
 				SetLightPower(0);
+				fire.SetActive(false);
 			}
 	}
 
