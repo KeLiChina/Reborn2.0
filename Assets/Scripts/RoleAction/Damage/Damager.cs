@@ -34,7 +34,7 @@ public class Damager : MonoBehaviour {
 			if (obj.tag == "Plane")
 			{
 				GameObject sou = Instantiate(soul,transform.position,transform.rotation);
-				soul.transform.parent = GlobalManager.instance.transform;
+				// soul.transform.parent = GlobalManager.instance.transform;
 				GlobalManager.instance.SetSoul(sou);
 			}
 			Destroy(gameObject);
