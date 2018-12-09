@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 95792614917595252}
   - component: {fileID: 114613257098127014}
   - component: {fileID: 114254280210478952}
+  - component: {fileID: 114283892357501988}
   m_Layer: 8
   m_Name: witch
   m_TagString: Player
@@ -81,6 +82,21 @@ GameObject:
   m_Name: Launch Point
   m_TagString: Untagged
   m_Icon: {fileID: -2663371497217273435, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1595866439637064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4683654662865352}
+  m_Layer: 8
+  m_Name: AtkPos (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -186,6 +202,19 @@ Transform:
   m_Father: {fileID: 4963381773388206}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4683654662865352
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1595866439637064}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.01, y: 0.64, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4963381773388206}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4762562136741436
 Transform:
   m_ObjectHideFlags: 1
@@ -219,13 +248,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1388011204215830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.536, y: 0.55, z: 0}
+  m_LocalPosition: {x: 14.1, y: -10.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4762562136741436}
   - {fileID: 4072584265331622}
   - {fileID: 4622929709779698}
   - {fileID: 4339683417285254}
+  - {fileID: 4683654662865352}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -375,6 +405,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _g: 0
+--- !u!114 &114283892357501988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388011204215830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87b76485d131c554297d1dc2452b331a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: 1000
+  norDamage: {fileID: 114952648296761288, guid: c0a4cdcacae39d549be624119e5b5fb8,
+    type: 2}
+  souDamage: {fileID: 114417171550719406, guid: 543834e64f2b1cd4f8c670279c62e983,
+    type: 2}
+  m_RoleType: 2
+  m_AtkForward: {fileID: 4683654662865352}
+  isPlayer: 0
+  m_characterController2d: {fileID: 0}
 --- !u!114 &114365746366184172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -414,7 +464,7 @@ MonoBehaviour:
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 567
+    m_Bits: 1591
   m_GroundCheck: {fileID: 4072584265331622}
   m_CeilingCheck: {fileID: 4762562136741436}
   m_CrouchDisableCollider: {fileID: 0}
@@ -5148,7 +5198,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 6e5d728790fbaff4fa815ea87a607ab0, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

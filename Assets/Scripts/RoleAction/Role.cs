@@ -46,7 +46,7 @@ public class Role : MonoBehaviour {
 	void Awake () {
 		m_characterController2d = GetComponentInChildren<CharacterController2D>();
 		m_RoleMovment = GetComponent<RoleMovment>();
-		m_light = GetComponent<Light>();
+		m_light = GetComponentInChildren<Light>();
 	}
 	
 	void Start () {
@@ -279,7 +279,7 @@ public class Role : MonoBehaviour {
 
 	public void HP_Changer(float value)
 	{
-		m_HP-=value;
+		m_HP = m_HP + value;
 		SetLightPower(m_HP);
 	}	
 
