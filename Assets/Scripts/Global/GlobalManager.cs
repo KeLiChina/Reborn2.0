@@ -71,6 +71,14 @@ public class GlobalManager : MonoBehaviour {
 			Debug.Log("====Dont not look At sou====");
 		}
 	}
+
+	// public void SomeBodyTrigTrap ()
+	// {
+	// 	for (int i = 0; i < EnemyRoles.Count;i++)
+	// 	{
+	// 		Debug.Log("====Dont not look At sou====");
+	// 	}
+	// }
 	
 
 }
