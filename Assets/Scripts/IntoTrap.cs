@@ -8,10 +8,20 @@ public class IntoTrap : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D obj)
     {
+        if (GlobalManager.instance.m_Player == obj.transform)
+        {
+            //  left.SetTrigger("bone_left");
+            // right.SetTrigger("bone_Right");
+            left.Play("bone_left");
+            right.Play("bone_right");
+            
+            var role = obj.GetComponent<Role>();
+            role.LogicDie();
+        }
 
 
-        left.SetTrigger("Start");
-        right.SetTrigger("Start");
+       
+
 
     }
 }
