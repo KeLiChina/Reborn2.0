@@ -24,6 +24,7 @@ public class RoleMovment : MonoBehaviour {
 	public bool m_IsPlayer = false;
 	public float m_HP = 100;
 	public bool m_atk = false;
+    //public bool m_dead = false;
 	public float JumpFroce = 400;
 
 	public virtual void OnMove(float horizontal,string actionName)
@@ -49,8 +50,17 @@ public class RoleMovment : MonoBehaviour {
 		
 	}
 
+    public virtual void OnDead(bool dead)
+    {
 
-	public virtual void OnCrouch(bool Crouch)
+
+        animator.SetBool("IsDead", dead);
+        //m_dead = true;
+
+    }
+
+
+    public virtual void OnCrouch(bool Crouch)
 	{
 		if (Input.GetButtonDown("Crouch"))
 		{
